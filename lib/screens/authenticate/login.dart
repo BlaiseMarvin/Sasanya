@@ -66,14 +66,14 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () async{
                         if (_formKey.currentState.validate())
                         {
-                          /*dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                          dynamic result = await _auth.signInAnon();
                           if(result==null)
                           {
                             print("error signing in");
                           } else{ 
                             print("signed in");
                             print(result);
-                          }*/
+                          }
                           print(email);
                           print(password);
                         }
