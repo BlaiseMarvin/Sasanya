@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sasanya/screens/login.dart';
+import 'package:sasanya/screens/authenticate/authenticate.dart';
+import 'package:sasanya/screens/authenticate/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         
         
       ),
-      home: LoginPage(),
+      home: Authenticate(),
     );
   }
 }
