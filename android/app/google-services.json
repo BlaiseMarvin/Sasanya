@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "623058788825",
+    "firebase_url": "https://sasanya-b597f.firebaseio.com",
+    "project_id": "sasanya-b597f",
+    "storage_bucket": "sasanya-b597f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:623058788825:android:9cbe69a2f0b778b68af9c8",
+        "android_client_info": {
+          "package_name": "com.example.sasanya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "623058788825-oaa88il02p9ngc7o8hsfrn12dm72aqmf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwDTjKVOrYEQ73M_vu8HhmMy2qk0cHSYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "623058788825-oaa88il02p9ngc7o8hsfrn12dm72aqmf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sasanya/services/auth.dart';
 import 'package:sasanya/shared/decorations.dart';
 import 'package:sasanya/shared/loading.dart';
 
@@ -10,6 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AuthService _auth = AuthService();
   final _formKey=GlobalKey<FormState>();
   String email;
   String password='';
@@ -61,11 +63,19 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(height:50.0),
                     RaisedButton(
-                      onPressed: (){
+                      onPressed: () async{
                         if (_formKey.currentState.validate())
                         {
-                        print(email);
-                        print(password);
+                          /*dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                          if(result==null)
+                          {
+                            print("error signing in");
+                          } else{ 
+                            print("signed in");
+                            print(result);
+                          }*/
+                          print(email);
+                          print(password);
                         }
                       },
                       child:Text("Sign In",style: TextStyle(fontWeight:FontWeight.bold ),),
