@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sasanya/services/auth.dart';
 import 'package:sasanya/shared/decorations.dart';
 
 class Register extends StatefulWidget {
@@ -9,6 +11,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final AuthService _auth = AuthService();
   final _formKey=GlobalKey<FormState>();
   String email='';
   String password='';
@@ -18,14 +21,14 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign up to Sasanya"),
+        title: Text("Sign up to Sasanya",style:GoogleFonts.bangers(textStyle:TextStyle(fontSize:30)) ),
         actions: [FlatButton.icon(
           onPressed: ()
           {
             widget.toggleView();
           }, 
           icon: Icon(Icons.person), 
-          label: Text("Sign In",style: TextStyle(color:Colors.white,fontWeight:FontWeight.bold),))],
+          label: Text("Sign In",style:GoogleFonts.bangers(textStyle:TextStyle(fontSize:20,color: Colors.white)) ))],
         ),
       body: Stack(
               fit: StackFit.expand,
@@ -58,19 +61,23 @@ class _RegisterState extends State<Register> {
                     ),
                     SizedBox(height:50.0),
                     RaisedButton(
-                      onPressed: (){
+                      onPressed: () async{
                         if (_formKey.currentState.validate())
                         {
-                        print(email);
-                        print(password);
+                          dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                          if(result==null)
+                          {
+                            setState(()=>error='Error signing up, make sure you have a good internet connection');
+                          }
                         }
                       },
-                      child:Text("Register",style: TextStyle(fontWeight:FontWeight.bold ),),
+                      child:Text("Register",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,))),
                       color: Colors.blue,
                       textColor: Colors.white,
                       
                       ),
-                      SizedBox(height:10.0)
+                      SizedBox(height:10.0),
+                      Text(error, style: TextStyle(color:Colors.red,fontSize:14.0),)
                     
                   ],
                   )

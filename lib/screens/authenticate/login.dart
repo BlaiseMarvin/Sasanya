@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sasanya/services/auth.dart';
 import 'package:sasanya/shared/decorations.dart';
 import 'package:sasanya/shared/loading.dart';
@@ -21,14 +22,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return loading?Loading():Scaffold(
       appBar: AppBar(
-        title: Text("Sign in to Sasanya",style: TextStyle(fontWeight:FontWeight.bold),),
+        title: Text("Sign in to Sasanya",style:GoogleFonts.bangers(textStyle:TextStyle(fontSize:30)) ),
         actions: [FlatButton.icon(
           onPressed: ()
           {
             widget.toggleView();
           }, 
           icon: Icon(Icons.person), 
-          label: Text("Register",style: TextStyle(fontWeight:FontWeight.bold,color:Colors.white),))],
+          label: Text("Register",style:GoogleFonts.bangers(textStyle:TextStyle(fontSize:20,color: Colors.white)) ))],
       ),
       body: Stack(
               fit: StackFit.expand,
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                           
                         }
                       },
-                      child:Text("Sign In",style: TextStyle(fontWeight:FontWeight.bold ),),
+                      child:Text("Sign In",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,))),
                       color: Colors.blue,
                       textColor: Colors.white,
                       

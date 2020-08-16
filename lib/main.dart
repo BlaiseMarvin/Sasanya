@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sasanya/models/user.dart';
 import 'package:sasanya/screens/authenticate/authenticate.dart';
 import 'package:sasanya/screens/authenticate/login.dart';
 import 'package:sasanya/screens/home/home.dart';
 import 'package:sasanya/screens/home/wrapper.dart';
+import 'package:sasanya/services/auth.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,16 +15,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      
-      theme: ThemeData(
+    return StreamProvider<User>.value(
+          value: AuthService().user, //this is the stream we are accessing from the auth service class
+          child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         
-        primarySwatch: Colors.blue,
-        
-        
+        theme: ThemeData(
+          
+          primarySwatch: Colors.blue,
+          
+          
+        ),
+        home: Wrapper(),
       ),
-      home: Home(),
     );
   }
 }
