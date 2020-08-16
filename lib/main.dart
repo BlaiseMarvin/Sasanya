@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sasanya/screens/authenticate/authenticate.dart';
 import 'package:sasanya/screens/authenticate/login.dart';
+import 'package:sasanya/screens/home/home.dart';
 import 'package:sasanya/screens/home/wrapper.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         
         
       ),
-      home: Wrapper(),
+      home: Home(),
     );
   }
 }

@@ -64,18 +64,20 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height:50.0),
                     RaisedButton(
                       onPressed: () async{
+                        setState(()=>loading=true);
                         if (_formKey.currentState.validate())
                         {
-                          dynamic result = await _auth.signInAnon();
+                          dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                           if(result==null)
                           {
-                            print("error signing in");
-                          } else{ 
-                            print("signed in");
-                            print(result);
-                          }
-                          print(email);
-                          print(password);
+                            setState(() 
+                            {
+                              error="COULD NOT SIGN IN WITH THOSE CREDENTIALS";
+                              loading=false;
+                              
+                              });
+                          } 
+                          
                         }
                       },
                       child:Text("Sign In",style: TextStyle(fontWeight:FontWeight.bold ),),

@@ -43,7 +43,7 @@ class AuthService{
         {
           AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
           FirebaseUser user = result.user;
-          return user;
+          return _userFromFirebaseUser(user);
      
 
           }catch(e)
@@ -53,4 +53,7 @@ class AuthService{
           }
 
           }
+
+  //register with an email and password
+ 
 }
