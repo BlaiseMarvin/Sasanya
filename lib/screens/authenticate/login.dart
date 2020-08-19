@@ -18,6 +18,10 @@ class _LoginPageState extends State<LoginPage> {
   String password='';
   String error='';
   bool loading = false;
+  String returnemail()
+  {
+    return email;
+  }
   @override
   Widget build(BuildContext context) {
     return loading?Loading():Scaffold(

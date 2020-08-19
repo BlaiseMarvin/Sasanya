@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sasanya/models/user.dart';
+import 'package:sasanya/screens/home/home.dart';
 
 import 'package:sasanya/screens/shopping_pages/stywom.dart';
 
@@ -9,6 +10,8 @@ import 'package:sasanya/shared/image_banner.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
+
+import 'package:sasanya/shared/loading.dart';
 
 
 class OfficeDesk extends StatefulWidget {
@@ -19,6 +22,7 @@ class OfficeDesk extends StatefulWidget {
 class _OfficeDeskState extends State<OfficeDesk> {
   File _imageFile;
   bool _uploaded=false;
+  bool loading=false;
   //String _downloadUrl;
   
   
@@ -47,6 +51,7 @@ class _OfficeDeskState extends State<OfficeDesk> {
     StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
     setState(() {
       _uploaded=true;
+      loading=false;
     });
   }
   /*Future downloadImage() async
@@ -62,96 +67,108 @@ class _OfficeDeskState extends State<OfficeDesk> {
 
 
 
-    return Scaffold(
-      backgroundColor: Colors.blue,
-      appBar: AppBar(
-        title:Text("Office Stuff",textAlign: TextAlign.center,style: GoogleFonts.bangers(textStyle:TextStyle(fontWeight:FontWeight.bold,fontSize:30,color: Colors.black)),),
+    return loading? Loading() : Container(
+      decoration: BoxDecoration(
+        gradient:LinearGradient(colors: [Colors.black,Colors.purple,Colors.blue,Colors.green,Colors.lime])
       ),
-      body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-          children: [
-            Container(
-                child:Card(
-                  
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10.0),
-                      Text("The Perfect Desk for you",textAlign: TextAlign.center,style: GoogleFonts.bangers(textStyle:TextStyle(fontWeight:FontWeight.bold,fontSize:25,color: Colors.black)),),
-                      SizedBox(height: 5.0,),
-                      ImageBanner("assets/images/officedesk.jpg"),
-                      SizedBox(height:20.0 ),
-                      Text("Choose item, that you'd want to exchange this desk for. ",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,)),),
-                      SizedBox(height:10.0 ),
-                      Text("Successful bidders will be contacted via email",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.black)),),
-                      SizedBox(height: 10.0,),
-                      
-
-                      Row(
-                        children: [
-                          SizedBox(width: 10.0),
-                          RaisedButton(
-                            color: Colors.blue,
-                            onPressed: (){
-                              getImage(true);
-                            },
-                            child: Text("Camera",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
-                            ),
-                          SizedBox(width:120.0 ),
-                          RaisedButton(
-                            color: Colors.blue,
-                            onPressed: (){
-                              getImage(false);
-                            },
-                            child: Text("Gallery",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
-                            ),]
-                      ),
-                      _imageFile ==null?Container():Container(
-                        child: Column(
-                          children: [
-                            Image.file(_imageFile,height: 300.0,width: 300.0,),
-                            Text("Upload your bid to storage and WAIT for the confirmation message before continuing",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
-                          ],
-                        )),
-                      
-                      _imageFile==null?Container(): RaisedButton(
-                        color: Colors.blue,
-                        onPressed: (){
-                          uploadImage();
-                        },
-                        child: Text("Upload your bid to storage",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
-                        
-                        ),
-                      _uploaded==false?Container():Text("Your bid has been logged, click next to continue with ladies' fashion",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize: 20)),)
-                      /*RaisedButton(
-                        child: Text("Download Image",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,)),),
-                        onPressed:(){
-                         // downloadImage();
-                        },
-
-                         ),*/
-                       // _downloadUrl==null?Container():Image.network(_downloadUrl),
-
-
-                      
-
-                    ],
-                  ),)
-            ),
-            /*RaisedButton(
-                color: Colors.red,
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>StyWom()));
-                },
-                child: Text("Next",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
-                ),*/
-            
-              
-           
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.blue[900],
+          title:Text("Office Stuff",textAlign: TextAlign.center,style: GoogleFonts.bangers(textStyle:TextStyle(fontWeight:FontWeight.bold,fontSize:30,color: Colors.white)),),
+          actions: [
+            FlatButton.icon(onPressed:(){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+            }, icon: Icon(Icons.home), label: Text("Home",style:TextStyle(color:Colors.white)))
           ],
         ),
+        body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+            children: [
+              Container(
+                  child:Card(
+                    
+                    child: Column(
+                      children: [
+                        SizedBox(height: 10.0),
+                        Text("The Perfect Desk for you",textAlign: TextAlign.center,style: GoogleFonts.bangers(textStyle:TextStyle(fontWeight:FontWeight.bold,fontSize:25,color: Colors.black)),),
+                        SizedBox(height: 5.0,),
+                        ImageBanner("assets/images/officedesk.jpg"),
+                        SizedBox(height:20.0 ),
+                        Text("Choose item, that you'd want to exchange this desk for. ",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,)),),
+                        SizedBox(height:10.0 ),
+                        Text("Successful bidders will be contacted via email",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.black)),),
+                        SizedBox(height: 10.0,),
+                        
+
+                        Row(
+                          children: [
+                            SizedBox(width: 10.0),
+                            RaisedButton(
+                              color: Colors.blue,
+                              onPressed: (){
+                                getImage(true);
+                              },
+                              child: Text("Camera",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
+                              ),
+                            SizedBox(width:120.0 ),
+                            RaisedButton(
+                              color: Colors.blue,
+                              onPressed: (){
+                                getImage(false);
+                              },
+                              child: Text("Gallery",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
+                              ),]
+                        ),
+                        _imageFile ==null?Container():Container(
+                          child: Column(
+                            children: [
+                              Image.file(_imageFile,height: 300.0,width: 300.0,),
+                              Text("Upload your bid to storage and WAIT for the confirmation message before continuing",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
+                            ],
+                          )),
+                        
+                        _imageFile==null?Container(): RaisedButton(
+                          color: Colors.blue,
+                          onPressed: (){
+                            setState(()=>loading=true);
+                            uploadImage();
+                          },
+                          child: Text("Upload your bid to storage",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
+                          
+                          ),
+                        _uploaded==false?Container():Text("Your bid has been logged, click next to continue",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize: 20)),)
+                        /*RaisedButton(
+                          child: Text("Download Image",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,)),),
+                          onPressed:(){
+                           // downloadImage();
+                          },
+
+                           ),*/
+                         // _downloadUrl==null?Container():Image.network(_downloadUrl),
+
+
+                        
+
+                      ],
+                    ),)
               ),
+              /*RaisedButton(
+                  color: Colors.red,
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>StyWom()));
+                  },
+                  child: Text("Next",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white)),),
+                  ),*/
+              
+                
+             
+            ],
+          ),
+                ),
+        ),
       ),
     );
   }
