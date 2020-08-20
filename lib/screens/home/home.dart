@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sasanya/models/user.dart';
 import 'package:sasanya/screens/authenticate/login.dart';
+import 'package:sasanya/screens/page.dart';
 import 'package:sasanya/screens/shopping_pages/car1.dart';
 import 'package:sasanya/screens/shopping_pages/iphone8.dart';
 import 'package:sasanya/screens/shopping_pages/laptop1.dart';
@@ -304,6 +305,23 @@ class Home extends StatelessWidget {
                   ),
                 ),
                
+               Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                     decoration:BoxDecoration(
+                      
+                      
+                      gradient: LinearGradient(colors: [Colors.blue,Colors.green,Colors.lime]),
+                    ),
+                    child: ListTile(
+                      title: Text("About",textAlign: TextAlign.center,style: GoogleFonts.pacifico(textStyle:TextStyle(fontSize:20,color: Colors.white))),
+                      
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>About()));
+                      },
+                    ),
+                  ),
+                ),
                 
                 
               
